@@ -63,6 +63,12 @@ public class MinRenderer extends HudRenderer {
 
 
         String biomestring = pos.world.getBiome(true);
+        if(biomestring.contains("/"))
+        {
+            String temp = biomestring.split("/")[1];
+            biomestring = temp.substring(0, 1).toUpperCase() + input.substring(1);
+        }
+
         Component biome = GuiUtils.colorize(translation(
                 "biome",
                 GuiUtils.colorize(
@@ -103,7 +109,7 @@ public class MinRenderer extends HudRenderer {
             int dstart = (x + w) - p - GuiUtils.getTextRenderer().width(directionComponent);
             int ypstart = (x + w) - p - GuiUtils.getTextRenderer().width(yawComponent);
 
-            drawInfo(guiGraphics, pitchComponent, ypstart, y + p, CoordinatesDisplay.CONFIG.get().definitionColor);
+            //drawInfo(guiGraphics, pitchComponent, ypstart, y + p, CoordinatesDisplay.CONFIG.get().definitionColor);
             drawInfo(guiGraphics, directionComponent, dstart, y + p + th, CoordinatesDisplay.CONFIG.get().dataColor);
             drawInfo(guiGraphics, yawComponent, ypstart, y + p + (th * 2), CoordinatesDisplay.CONFIG.get().definitionColor);
         }

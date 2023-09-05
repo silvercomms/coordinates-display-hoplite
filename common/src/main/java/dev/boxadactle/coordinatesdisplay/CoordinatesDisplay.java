@@ -102,8 +102,8 @@ public class CoordinatesDisplay {
 				case "Mushroom Fields" -> 0x4c4654;
 				case "Old Growth Pine Taiga", "Old Growth Spruce Forest" -> 0x3b230d;
 				case "Plains", "Sunflower Plains" -> 0x4dd115;
-				case "Savanna", "Savanna Plateau" -> 0x5c701c;
-				case "Cherry Grove" -> 0xd863e0;
+				case "Savanna", "Savanna Plateau", "Savanna Flats", "Steppe", "Oak Savanna" -> 0x5c701c;
+				case "Cherry Grove", "Sakura Flats", "Sakura Mountains", "Sakura River" -> 0xd863e0;
 				default -> defaultColor;
 			};
 

@@ -123,11 +123,10 @@ public class DefaultRenderer extends HudRenderer {
         );
 
         String biomestring = pos.world.getBiome(true);
-        String biomestring = pos.world.getBiome(true);
         if(biomestring.contains("/"))
         {
             String temp = biomestring.split("/")[1];
-            biomestring = temp.substring(0, 1).toUpperCase() + input.substring(1);
+            biomestring = temp.substring(0, 1).toUpperCase() + temp.substring(1);
         }
         Component biome = GuiUtils.colorize(translation(
                 "biome",

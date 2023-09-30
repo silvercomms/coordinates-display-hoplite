@@ -45,6 +45,7 @@ public class MinRenderer extends HudRenderer {
                 )
         ), config().definitionColor);
 
+
         Component ytext = GuiUtils.colorize(translation(
                 "y",
                 GuiUtils.colorize(
@@ -90,9 +91,12 @@ public class MinRenderer extends HudRenderer {
         Component directionComponent = Component.translatable("hud.coordinatesdisplay.min." + ModUtil.getDirectionFromYaw(yaw), direction);
         Component yawComponent = Component.literal(yaw > 0 ? "+" : "-");
 
+        Component cCounter = GuiUtils.colorize(
+                Component.literal("C: x/x"),
+                config().dataColor
+        );
 
-
-        int w = calculateWidth(p, th, tp, xtext, ytext, ztext, biome);
+        int w = Math.max(101,calculateWidth(p, th, tp, xtext, ytext, ztext, biome));
         int h = calculateHeight(p, th);
 
         // rendering
@@ -103,15 +107,16 @@ public class MinRenderer extends HudRenderer {
         drawInfo(guiGraphics, xtext, x + p, y + p, CoordinatesDisplay.CONFIG.get().definitionColor);
         drawInfo(guiGraphics, ytext, x + p, y + p + th, CoordinatesDisplay.CONFIG.get().definitionColor);
         drawInfo(guiGraphics, ztext, x + p, y + p + (th * 2), CoordinatesDisplay.CONFIG.get().definitionColor);
-
         drawInfo(guiGraphics, biome, x + p, y + p + (th * 3), CoordinatesDisplay.CONFIG.get().definitionColor);
         {
             int dstart = (x + w) - p - GuiUtils.getTextRenderer().width(directionComponent);
             int ypstart = (x + w) - p - GuiUtils.getTextRenderer().width(yawComponent);
+            int ccstart = (x + w) - p - GuiUtils.getTextRenderer().width(cCounter);
 
             //drawInfo(guiGraphics, pitchComponent, ypstart, y + p, CoordinatesDisplay.CONFIG.get().definitionColor);
             drawInfo(guiGraphics, directionComponent, dstart, y + p + th, CoordinatesDisplay.CONFIG.get().dataColor);
-            drawInfo(guiGraphics, yawComponent, ypstart, y + p + (th * 2), CoordinatesDisplay.CONFIG.get().definitionColor);
+            drawInfo(guiGraphics, yawComponent, ypstart, y + p /*+ (th * 2)*/, CoordinatesDisplay.CONFIG.get().definitionColor);
+            drawInfo(guiGraphics, cCounter, ccstart, y + p + (th * 2), CoordinatesDisplay.CONFIG.get().definitionColor);
         }
 
         return new Rect<>(x, y, w, h);

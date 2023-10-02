@@ -29,7 +29,7 @@ public class MinRenderer extends HudRenderer {
 
     private int calculateHeight(int p, int th) {
         // this might become a real method later
-        return p + (th * 4) + p;
+        return p + (th * 5) + p;
     }
 
     @Override
@@ -107,16 +107,15 @@ public class MinRenderer extends HudRenderer {
         drawInfo(guiGraphics, xtext, x + p, y + p, CoordinatesDisplay.CONFIG.get().definitionColor);
         drawInfo(guiGraphics, ytext, x + p, y + p + th, CoordinatesDisplay.CONFIG.get().definitionColor);
         drawInfo(guiGraphics, ztext, x + p, y + p + (th * 2), CoordinatesDisplay.CONFIG.get().definitionColor);
-        drawInfo(guiGraphics, biome, x + p, y + p + (th * 3), CoordinatesDisplay.CONFIG.get().definitionColor);
+        drawInfo(guiGraphics, cCounter, x + p, y + p + (th * 3), CoordinatesDisplay.CONFIG.get().definitionColor);
+        drawInfo(guiGraphics, biome, x + p, y + p + (th * 4), CoordinatesDisplay.CONFIG.get().definitionColor);
         {
             int dstart = (x + w) - p - GuiUtils.getTextRenderer().width(directionComponent);
             int ypstart = (x + w) - p - GuiUtils.getTextRenderer().width(yawComponent);
-            int ccstart = (x + w) - p - GuiUtils.getTextRenderer().width(cCounter);
 
             //drawInfo(guiGraphics, pitchComponent, ypstart, y + p, CoordinatesDisplay.CONFIG.get().definitionColor);
             drawInfo(guiGraphics, directionComponent, dstart, y + p + th, CoordinatesDisplay.CONFIG.get().dataColor);
             drawInfo(guiGraphics, yawComponent, ypstart, y + p /*+ (th * 2)*/, CoordinatesDisplay.CONFIG.get().definitionColor);
-            drawInfo(guiGraphics, cCounter, ccstart, y + p + (th * 2), CoordinatesDisplay.CONFIG.get().definitionColor);
         }
 
         return new Rect<>(x, y, w, h);

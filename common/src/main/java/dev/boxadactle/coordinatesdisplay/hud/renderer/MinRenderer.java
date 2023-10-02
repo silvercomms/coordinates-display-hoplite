@@ -96,7 +96,8 @@ public class MinRenderer extends HudRenderer {
                 config().dataColor
         );
 
-        int w = Math.max(101,calculateWidth(p, th, tp, xtext, ytext, ztext, biome));
+        // int w = Math.max(101,calculateWidth(p, th, tp, xtext, ytext, ztext, biome));
+        int w = calculateWidth(p, th, tp, xtext, ytext, ztext, biome);
         int h = calculateHeight(p, th);
 
         // rendering

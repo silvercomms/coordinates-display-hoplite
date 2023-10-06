@@ -22,6 +22,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Optional;
 
 @SuppressWarnings("unchecked")
 public class ModUtil {
@@ -328,6 +329,13 @@ public class ModUtil {
 
     public static Vec3<Double> fromMinecraftVector(net.minecraft.world.phys.Vec3 vec3d) {
         return new Vec3<>(vec3d.x, vec3d.y, vec3d.z);
+    }
+
+    public static String getCCounterString() {
+        return Optional.of(Minecraft.getInstance().levelRenderer.getChunkStatistics().split(" "))
+                .filter(a -> a.length > 1) // guarding against of bounds exception (should be impossible but some mod might mess things up)
+                .map(a -> a[1])
+                .orElse("0/0");
     }
 
 }

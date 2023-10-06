@@ -22,7 +22,7 @@ public class DefaultRenderer extends HudRenderer {
         super("hud.coordinatesdisplay.");
     }
 
-    private int calculateWidth(int p, int tp, Component xtext, Component ytext, Component ztext, Component chunkx, Component chunkz, Component direction, Component biome, Component version) {
+    private int calculateWidth(int p, int tp, Component xtext, Component ytext, Component ztext, Component chunkx, Component chunkz, Component direction, Component cCount, Component biome, Component version) {
         int a = GuiUtils.getLongestLength(xtext, ytext, ztext);
         int b = GuiUtils.getLongestLength(chunkx, chunkz);
         int c = a + (CoordinatesDisplay.CONFIG.get().renderChunkData ? b + tp : 0);
@@ -33,6 +33,9 @@ public class DefaultRenderer extends HudRenderer {
         }
         if (CoordinatesDisplay.CONFIG.get().renderBiome) {
             if (GuiUtils.getLongestLength(biome) > d) d = GuiUtils.getLongestLength(biome);
+        }
+        if (CoordinatesDisplay.CONFIG.get().renderCCount) {
+            if (GuiUtils.getLongestLength(cCount) > d) d = GuiUtils.getLongestLength(cCount);
         }
         if (CoordinatesDisplay.CONFIG.get().renderMCVersion) {
             if (GuiUtils.getLongestLength(version) > d) d = GuiUtils.getLongestLength(version);
@@ -48,6 +51,9 @@ public class DefaultRenderer extends HudRenderer {
         if (CoordinatesDisplay.CONFIG.get().renderDirection) {
             b += th;
         }
+        if (CoordinatesDisplay.CONFIG.get().renderCCount) {
+            b += th;
+        }
         if (CoordinatesDisplay.CONFIG.get().renderBiome) {
             b += th;
         }
@@ -55,7 +61,7 @@ public class DefaultRenderer extends HudRenderer {
             b += th;
         }
 
-        boolean c = (CoordinatesDisplay.CONFIG.get().renderDirection || CoordinatesDisplay.CONFIG.get().renderBiome || CoordinatesDisplay.CONFIG.get().renderMCVersion);
+        boolean c = (CoordinatesDisplay.CONFIG.get().renderDirection || CoordinatesDisplay.CONFIG.get().renderCCount || CoordinatesDisplay.CONFIG.get().renderBiome || CoordinatesDisplay.CONFIG.get().renderMCVersion);
 
         return p + a + (c ? tp : 0) + b + p;
     }
@@ -122,6 +128,13 @@ public class DefaultRenderer extends HudRenderer {
                 ) : Component.literal("")
         );
 
+        Component cCounter = GuiUtils.colorize(translation(
+                "c",
+                GuiUtils.colorize(
+                        Component.literal(ModUtil.getCCounterString()),
+                        config().dataColor)
+        ), config().definitionColor);
+
         String biomestring = pos.world.getBiome(true);
         if(biomestring.contains("/"))
         {
@@ -150,7 +163,7 @@ public class DefaultRenderer extends HudRenderer {
         int tp = config().textPadding;
         int th = GuiUtils.getTextRenderer().lineHeight;
 
-        int w = calculateWidth(p, tp, xtext, ytext, ztext, chunkx, chunkz, direction, biome, mcversion);
+        int w = calculateWidth(p, tp, xtext, ytext, ztext, chunkx, chunkz, direction, cCounter, biome, mcversion);
         int h = calculateHeight(th, p, tp);
 
         if (config().renderBackground) {
@@ -167,16 +180,22 @@ public class DefaultRenderer extends HudRenderer {
             drawInfo(guiGraphics, chunkz, x + p + GuiUtils.getLongestLength(xtext, ytext, ztext) + tp, y + p + (th), CoordinatesDisplay.CONFIG.get().definitionColor);
         }
 
+        int offset = 0;
+
         if (config().renderDirection) {
-            drawInfo(guiGraphics, direction, x + p, y + p + (th * 3) + tp, CoordinatesDisplay.CONFIG.get().definitionColor);
+            drawInfo(guiGraphics, direction, x + p, y + p + (th * 3) + tp + (offset += th), CoordinatesDisplay.CONFIG.get().definitionColor);
+        }
+
+        if (config().renderCCount) {
+            drawInfo(guiGraphics, cCounter, x + p, y + p + (th * 3) + tp + (offset += th), CoordinatesDisplay.CONFIG.get().definitionColor);
         }
 
         if (config().renderBiome) {
-            drawInfo(guiGraphics, biome, x + p, y + p + (th * 3) + tp + (CoordinatesDisplay.CONFIG.get().renderDirection ? th : 0), CoordinatesDisplay.CONFIG.get().definitionColor);
+            drawInfo(guiGraphics, biome, x + p, y + p + (th * 3) + tp + (offset += th), CoordinatesDisplay.CONFIG.get().definitionColor);
         }
 
         if (config().renderMCVersion) {
-            drawInfo(guiGraphics, mcversion, x + p, y + p + (th * 3) + tp + (CoordinatesDisplay.CONFIG.get().renderDirection ? th : 0) + (CoordinatesDisplay.CONFIG.get().renderBiome ? th : 0), CoordinatesDisplay.CONFIG.get().dataColor);
+            drawInfo(guiGraphics, mcversion, x + p, y + p + (th * 3) + tp + (offset += th), CoordinatesDisplay.CONFIG.get().dataColor);
         }
 
 

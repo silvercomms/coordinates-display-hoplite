@@ -63,8 +63,16 @@ public class LineRenderer extends HudRenderer {
                 config().dataColor
         )), config().definitionColor);
 
+        Component cCounter = GuiUtils.colorize(translation(
+                "c",
+                GuiUtils.colorize(
+                        Component.literal(ModUtil.getCCounterString()),
+                        config().dataColor)
+        ), config().definitionColor);
+
         Component a = next(next(xtext, ytext), ztext);
         if (config().renderDirection) a = next(a, direction);
+        if (config().renderCCount) a = next(a, cCounter);
 
         int p = 2;
 

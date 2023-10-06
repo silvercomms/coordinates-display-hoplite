@@ -41,6 +41,7 @@ public class MaxRenderer extends HudRenderer {
         Component g = definition(translation(ModUtil.getDirectionFromYaw(pos.headRot.wrapYaw())));
         Component direction = definition(translation("direction", g, value(formatter.formatDecimal(pos.headRot.wrapYaw())), value(formatter.formatDecimal(pos.headRot.wrapPitch()))));
 
+        Component cCount = definition(translation("c", value(ModUtil.getCCounterString())));
         Component biome = definition(translation("biome", value(pos.world.getBiome(false))));
 
         Component version = definition(translation("version", value(ClientUtils.getGameVersion())));
@@ -56,6 +57,7 @@ public class MaxRenderer extends HudRenderer {
         if (config().renderChunkData) toRender.add(chunk);
 
         if (config().renderDirection) toRender.add(direction);
+        if (config().renderCCount) toRender.add(cCount);
         if (config().renderBiome) toRender.add(biome);
         if (config().renderMCVersion) toRender.add(version);
         toRender.add(dimension);

@@ -26,6 +26,7 @@ public class ModConfig implements BConfig {
 
     public boolean renderBackground = true;
     public boolean renderChunkData = true;
+    public boolean renderCCount = true;
     public boolean renderDirection = true;
     public boolean renderDirectionInt = true;
     public boolean renderBiome = true;

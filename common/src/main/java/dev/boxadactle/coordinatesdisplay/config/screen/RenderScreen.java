@@ -72,6 +72,13 @@ public class RenderScreen extends BConfigScreen implements HudHelper {
 
         // biome
         ((BBooleanButton)this.addConfigLine(new BBooleanButton(
+                "button.coordinatesdisplay.c",
+                config().renderCCount,
+                newVal -> config().renderCCount = newVal
+        ))).active = ModUtil.or(config().renderMode, ModConfig.RenderMode.DEFAULT, ModConfig.RenderMode.MAXIMUM);
+
+        // biome
+        ((BBooleanButton)this.addConfigLine(new BBooleanButton(
                 "button.coordinatesdisplay.biome",
                 config().renderBiome,
                 newVal -> config().renderBiome = newVal

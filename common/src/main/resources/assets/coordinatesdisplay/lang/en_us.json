@@ -29,6 +29,7 @@
   "hud.coordinatesdisplay.min.x": "X: %s",
   "hud.coordinatesdisplay.min.y": "Y: %s",
   "hud.coordinatesdisplay.min.z": "Z: %s",
+  "hud.coordinatesdisplay.min.c": "C: %s",
   "hud.coordinatesdisplay.min.direction": "%s",
   "hud.coordinatesdisplay.min.biome": "%s",
   "hud.coordinatesdisplay.min.north": "N",
@@ -41,6 +42,7 @@
   "hud.coordinatesdisplay.min.northwest": "NW",
 
   "hud.coordinatesdisplay.max.xyz": "XYZ: %s %s %s ",
+  "hud.coordinatesdisplay.max.c": "C: %s ",
   "hud.coordinatesdisplay.max.block": "Block XYZ: %s %s %s [%s %s %s]",
   "hud.coordinatesdisplay.max.block.targeted": "Targeted Block: %s %s %s",
   "hud.coordinatesdisplay.max.chunk": "Chunk: %s %s %s",
@@ -60,6 +62,7 @@
   "hud.coordinatesdisplay.line.x": "X: %s",
   "hud.coordinatesdisplay.line.y": "Y: %s",
   "hud.coordinatesdisplay.line.z": "Z: %s",
+  "hud.coordinatesdisplay.line.c": "C: %s",
   "hud.coordinatesdisplay.line.direction": "Facing %s",
   "hud.coordinatesdisplay.line.north": "North",
   "hud.coordinatesdisplay.line.northeast": "Northeast",

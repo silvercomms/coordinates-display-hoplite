@@ -9,10 +9,12 @@ import dev.boxadactle.coordinatesdisplay.CoordinatesDisplay;
 import dev.boxadactle.coordinatesdisplay.ModUtil;
 import dev.boxadactle.coordinatesdisplay.hud.HudRenderer;
 import dev.boxadactle.coordinatesdisplay.position.Position;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 
 import java.text.DecimalFormat;
+import java.util.Optional;
 
 public class MinRenderer extends HudRenderer {
 
@@ -91,10 +93,16 @@ public class MinRenderer extends HudRenderer {
         Component directionComponent = Component.translatable("hud.coordinatesdisplay.min." + ModUtil.getDirectionFromYaw(yaw), direction);
         Component yawComponent = Component.literal(yaw > 0 ? "+" : "-");
 
-        Component cCounter = GuiUtils.colorize(
-                Component.literal("C: x/x"),
-                config().dataColor
-        );
+        Component cCounter = GuiUtils.colorize(translation(
+                "C",
+                GuiUtils.colorize(
+                        Component.literal(Optional.of(Minecraft.getInstance().levelRenderer.getChunkStatistics().split(" "))
+                                .filter(a -> a.length > 1) // guarding against of bounds exception (should be impossible but some mod might mess things up)
+                                .map(a -> a[1])
+                                .orElse("0/0")),
+                        config().dataColor
+                )
+        ), config().definitionColor);
 
         // int w = Math.max(101,calculateWidth(p, th, tp, xtext, ytext, ztext, biome));
         int w = calculateWidth(p, th, tp, xtext, ytext, ztext, biome);

@@ -17,6 +17,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import org.apache.commons.lang3.SystemUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -338,4 +339,14 @@ public class ModUtil {
                 .orElse("0/0");
     }
 
+    @NotNull
+    public static String getBiomestring(Position pos) {
+        String biomestring = pos.world.getBiome(true);
+        if(biomestring.contains("/"))
+        {
+            String temp = biomestring.split("/")[1];
+            biomestring = temp.substring(0, 1).toUpperCase() + temp.substring(1);
+        }
+        return biomestring;
+    }
 }

@@ -65,13 +65,7 @@ public class MinRenderer extends HudRenderer {
         ), config().definitionColor);
 
 
-        String biomestring = pos.world.getBiome(true);
-        if(biomestring.contains("/"))
-        {
-            String temp = biomestring.split("/")[1];
-            biomestring = temp.substring(0, 1).toUpperCase() + temp.substring(1);
-        }
-
+        String biomestring = ModUtil.getBiomestring(pos);
         Component biome = GuiUtils.colorize(translation(
                 "biome",
                 GuiUtils.colorize(

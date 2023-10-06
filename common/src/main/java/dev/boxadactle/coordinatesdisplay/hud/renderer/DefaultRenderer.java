@@ -14,8 +14,6 @@ import dev.boxadactle.coordinatesdisplay.position.Position;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 
-import java.text.DecimalFormat;
-
 public class DefaultRenderer extends HudRenderer {
 
     public DefaultRenderer() {
@@ -135,12 +133,7 @@ public class DefaultRenderer extends HudRenderer {
                         config().dataColor)
         ), config().definitionColor);
 
-        String biomestring = pos.world.getBiome(true);
-        if(biomestring.contains("/"))
-        {
-            String temp = biomestring.split("/")[1];
-            biomestring = temp.substring(0, 1).toUpperCase() + temp.substring(1);
-        }
+        String biomestring = ModUtil.getBiomestring(pos);
         Component biome = GuiUtils.colorize(translation(
                 "biome",
                 GuiUtils.colorize(
@@ -201,4 +194,5 @@ public class DefaultRenderer extends HudRenderer {
 
         return new Rect<>(x, y, w, h);
     }
+
 }

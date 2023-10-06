@@ -7,6 +7,7 @@ import dev.boxadactle.boxlib.math.mathutils.NumberFormatter;
 import dev.boxadactle.boxlib.util.ClientUtils;
 import dev.boxadactle.boxlib.util.GuiUtils;
 import dev.boxadactle.boxlib.util.RenderUtils;
+import dev.boxadactle.coordinatesdisplay.CoordinatesDisplay;
 import dev.boxadactle.coordinatesdisplay.ModUtil;
 import dev.boxadactle.coordinatesdisplay.hud.HudRenderer;
 import dev.boxadactle.coordinatesdisplay.position.Position;
@@ -42,7 +43,13 @@ public class MaxRenderer extends HudRenderer {
         Component direction = definition(translation("direction", g, value(formatter.formatDecimal(pos.headRot.wrapYaw())), value(formatter.formatDecimal(pos.headRot.wrapPitch()))));
 
         Component cCount = definition(translation("c", value(ModUtil.getCCounterString())));
-        Component biome = definition(translation("biome", value(pos.world.getBiome(false))));
+        String biomestring = ModUtil.getBiomestring(pos);
+        Component biome = definition(translation("biome", GuiUtils.colorize(
+                Component.literal(biomestring),
+                CoordinatesDisplay.CONFIG.get().biomeColors ?
+                        CoordinatesDisplay.BiomeColors.getBiomeColor(biomestring, CoordinatesDisplay.CONFIG.get().dataColor) :
+                        CoordinatesDisplay.CONFIG.get().dataColor
+        )));
 
         Component version = definition(translation("version", value(ClientUtils.getGameVersion())));
 

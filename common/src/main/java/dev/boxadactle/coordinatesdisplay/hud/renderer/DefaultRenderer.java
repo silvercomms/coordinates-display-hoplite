@@ -50,7 +50,7 @@ public class DefaultRenderer extends HudRenderer {
             b += th;
         }
         if (CoordinatesDisplay.CONFIG.get().renderCCount) {
-            b += th;
+            b += th * 2;
         }
         if (CoordinatesDisplay.CONFIG.get().renderBiome) {
             b += th;
